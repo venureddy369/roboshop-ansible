@@ -1,0 +1,12 @@
+- name: Setup Prometheus Server Config
+  when: PROMSERVER is defined
+  ansible.builtininclude_role:
+    name: prometheus
+    tasks_from: server
+
+
+- name: Setup Prometheus Node Config
+  when: PROMNODE is defined
+  ansible.builtininclude_role:
+    name: prometheus
+    tasks_from: node
