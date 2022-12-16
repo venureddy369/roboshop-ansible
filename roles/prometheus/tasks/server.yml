@@ -22,4 +22,20 @@
 - name: Check Service is running or not
   ansible.builtin.shell: netstat -lntp | grep 9090
 
+- name: Update alert manager configuration
+  ansible.builtin.template:
+    src: alertmanager.yml
+    dest: /opt/alertmanager/alertmanager.yml
+
+- name: Restart Alertmanager Service
+  ansible.builtin.systemd:
+    name: alertmanager.service
+    state: restarted
+
+- name: Check Alert manager Service is running or not
+  ansible.builtin.shell: netstat -lntp | grep 9093
+
+
+
+
 
