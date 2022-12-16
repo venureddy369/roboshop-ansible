@@ -1,5 +1,9 @@
--
-  name: Copy Prometheus configuration
+- name: Copy Record Rules
+  ansible.builtin.template:
+    src: record_rules.yml
+    dest: /opt/prometheus/record_rules.yml
+
+- name: Copy Prometheus configuration
   ansible.builtin.template:
     src: prometheus.yml
     dest: /opt/prometheus/prometheus.yml
