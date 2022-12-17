@@ -1,0 +1,26 @@
+#    PRINT "Download App content"
+#    curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>$LOG
+#    STAT $?
+#
+#
+#    PRINT "Remove previous version of app"
+#    cd ${APP_LOC} &>>$LOG
+#    rm -rf ${CONTENT} &>>$LOG
+#    STAT $?
+#
+#    PRINT "Extracting app content"
+#    unzip -o /tmp/${COMPONENT}.zip &>>$LOG
+#    STAT $?
+
+- name: Add RoboShop Application user
+  when: APP_USER is defined
+  ansible.builtin.user:
+    name: " {{ APP_USER }} "
+
+- name: Download App content
+  ansible.builtin.get_url:
+    url: https://github.com/roboshop-devops-project/{{ COMPONENT }}/archive/main.zip
+    dest: /tmp/{{ COMPONENT }}.zip
+    mode: '0440'
+
+
