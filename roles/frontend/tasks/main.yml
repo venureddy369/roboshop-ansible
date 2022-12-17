@@ -1,6 +1,4 @@
-#PRINT "Installing NGINX"
-#yum install nginx -y &>>$LOG
-#STAT $?
+
 #APP_LOC=/usr/share/nginx/html
 #
 #DOWNLOAD_APP_CODE
