@@ -1,13 +1,5 @@
-#    PRINT "Download App content"
-#    curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>$LOG
-#    STAT $?
-#
-#
-#    PRINT "Remove previous version of app"
-#    cd ${APP_LOC} &>>$LOG
-#    rm -rf ${CONTENT} &>>$LOG
-#    STAT $?
-#
+
+
 #    PRINT "Extracting app content"
 #    unzip -o /tmp/${COMPONENT}.zip &>>$LOG
 #    STAT $?
@@ -21,6 +13,24 @@
   ansible.builtin.get_url:
     url: https://github.com/roboshop-devops-project/{{ COMPONENT }}/archive/main.zip
     dest: /tmp/{{ COMPONENT }}.zip
-    mode: '0440'
+
+
+- name: Remove Previous Version of APP
+  ansible.builtin.file:
+    path: "{{ APP_LOC }}"
+    state: absent
+
+
+- name: Download App content & Extract it
+  ansible.builtin.unarchive:
+    src: https://github.com/roboshop-devops-project/{{ COMPONENT }}/archive/main.zip
+    dest: "/tmp"
+    remote_src: yes
+
+- name: Copy Extracted App Content to App Location
+  ansible.builtin.copy:
+    src: /tmp/{{COMPONENT}}-main/
+    dest: "{{ APP_LOC }}"
+
 
 
