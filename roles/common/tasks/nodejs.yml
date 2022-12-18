@@ -1,0 +1,41 @@
+#  NODEJS(){
+#    APP_LOC=/home/roboshop
+#    CONTENT=${COMPONENT}
+#    APP_USER=roboshop
+#    PRINT "Download NodeJs repo file"
+#    curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$LOG
+#    STAT $?
+#
+#    PRINT "Install nodejs"
+#    yum install nodejs -y &>>$LOG
+#    STAT $?
+#    DOWNLOAD_APP_CODE
+#    mv ${COMPONENT}-main ${COMPONENT}
+#    cd ${COMPONENT}
+#
+#    PRINT "Install nodejs dependencies"
+#    npm install &>>$LOG
+#    STAT $?
+#
+#
+#    PRINT "Configure endpoints for Systemd Configuration"
+#    sed -i -e 's/REDIS_ENDPOINT/redis.devops69.online/' -e 's/CATALOGUE_ENDPOINT/catalogue.devops.online/' systemd.service &>>$LOG
+#    STAT $?
+#
+#    SYSTEMD_SETUP
+#
+#  }
+
+
+- name: Configure NodeJs Repo
+  ansible.builtin.shell: https://rpm.nodesource.com/setup_lts.x | bash
+
+- name: Install NodeJs
+  ansible.builtin.yum:
+    name: nodejs
+    state: installed
+
+- name: Include Download App code Tasks from common Role
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download-app-code
