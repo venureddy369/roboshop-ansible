@@ -1,9 +1,5 @@
 
-#APP_LOC=/usr/share/nginx/html
 #
-#DOWNLOAD_APP_CODE
-#
-#mv frontend-main/static/* .
 #
 #PRINT "Copy Roboshop Configuration File"
 #mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf
@@ -32,4 +28,15 @@
   ansible.builtin.include_role:
      name: common
      tasks_from: download-app-code
+
+- name: Copy Roboshop Configuration File
+  ansible.builtin.copy:
+    src: roboshop.conf
+    dest: /etc/nginx/default.d/roboshop.conf
+
+- name: Start Nginx service
+  ansible.builtin.systemd:
+    name: nginx
+    start: restarted
+    enabled: yes
 
