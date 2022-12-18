@@ -50,7 +50,7 @@
     dest: /etc/yum.repos.d/mongodb.repo
 
 - name: Install MongoDB
-  ansible.builtin.systemd:
+  ansible.builtin.yum:
     name: mangodb-org
     state: installed
 
