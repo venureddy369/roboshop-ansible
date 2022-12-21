@@ -3,8 +3,8 @@
   tasks:
     - name: Create Value
       community.aws.aws_ssm_parameter_store:
-        name: "{{ item.name }}"
-        value: "{{ item.value }}"
+        name: "{{item.name}}"
+        value: "{{item.value}}"
         region: "us-east-1"
       loop:
         - {name: "param.dev.catalogue.MONGO", value: "true"}
@@ -14,4 +14,8 @@
         - {name: "param.dev.frontend.CART_URL", value: "http://dev-cart.venudevops.online:8080/"}
         - {name: "param.dev.frontend.SHIPPING_URL", value: "http://dev-shipping.venudevops.online:8080/"}
         - {name: "param.dev.frontend.PAYMENT_URL", value: "http://dev-payment.venudevops.online:8080/"}
+
+
+
+
 
