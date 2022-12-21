@@ -1,8 +1,8 @@
 - name: Create ALl Roboshop parameters
   hosts: localhost
   tasks:
-    - name: Create or update key/value pair in AWS SSM parameter store
-      community.aws.aws_ssm_paramater_store:
+    - name: Create Value
+      community.aws.aws_ssm_parameter_store:
         name: "{{ item.name }}"
         value: "{{ item.value }}"
         region: "us-east-1"
